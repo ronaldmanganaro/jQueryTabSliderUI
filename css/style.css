@@ -1,0 +1,64 @@
+﻿/*
+Ronald Manganaro(c) copyright 2016
+Email: ronald_manganaro@student.uml.edu
+COMP 3010 - 201 GUI Programming I
+Assignment 7
+Ronald Manganaro, Umass Lowell Computer Science
+Date: November 15, 2016
+
+Description: Nothing added for this assignment
+same as assignment 6.
+
+*/
+h1 {
+  text-align: center;
+}
+
+
+body {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: powderblue;
+}
+
+/* center the warning in the middle of the page */
+p {
+    text-align: center;
+}
+
+table, td{
+    margin-left: auto;
+    margin-right:auto;
+    color: yellow;
+    border: solid;
+    /* my quad color border */
+    border-color: red green blue yellow;
+}
+
+/* each odd row will be red */
+tr:nth-child(odd) {
+    background: red;
+}
+
+/* each even row is blue*/
+tr:nth-child(even) {
+    background: blue;
+}
+
+/* Footer was deleted to not take up screen space */
+
+/* moved style from validator to here */
+img.validator {
+    border:0;
+    width:88px;
+    height:31px;
+}
+
+form {
+    display: block;
+    font-size:11px;
+    border:solid 1px #aacfe4;
+    width:170px;
+}
+
