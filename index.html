@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<!--
+
+Ronald Manganaro(c) copyright 2016
+Email: ronald_manganaro@student.uml.edu
+COMP 3010 - 201 GUI Programming I
+Assignment 7
+Ronald Manganaro, Umass Lowell Computer Science
+Date: November 15, 2016
+
+Description: added labels and jquery links. All additions
+were implemented in the Table.js file. Other than that
+I used labels for the input text.
+
+-->
+<html lang="en">
+
+  <head>
+    <title>RFManganaro's Times Tables</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+  </head>
+
+  <body>
+    <!-- Header just include h1 welcome text -->
+    <header>
+      <h1>
+          Welcome to Ronald Manganaro's Table Generator!
+      </h1>
+      <hr>
+    </header>
+
+    <!-- This div holds all my forms/generate button --> 
+    <div id="formarea">
+        <form name="numbersForm" id="myForm">
+            <label for="firstInput">Horizontal Start:</label>
+            <input class="numbersONLY" type="number" name="firstInput" id="firstInput">
+            <br>
+            <label for="secondInput">Horizontal End:</label>
+            <input class="numbersONLY" type="number" name="secondInput" id="secondInput">
+            <br>
+            <label for="thirdInput"> Vertical Start:</label>
+            <input class="numbersONLY" type="number" name="thirdInput" id="thirdInput">
+            <br>
+            <label for="fourthInput">Vertical End:</label>
+            <input class="numbersONLY" type="number" name="fourthInput" id="fourthInput">
+            <br>
+            <input id="createBtn" type="button" onclick="validate();" value="Generate">
+            <!-- Quick warning that large tables take time to create -->
+            <p>Please do not enter ranges with > 200 numbers! <p>
+        </form>
+    </div>
+
+		<!-- location of my dynamic table -->
+	  <div id="tableDiv">
+		  <table id="theTable"></table>
+	  </div>
+      
+    <!-- This is the js file that hold createTable, deleteTable, and validate -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="js/Table.js"></script>
+  </body>
+
+</html>
