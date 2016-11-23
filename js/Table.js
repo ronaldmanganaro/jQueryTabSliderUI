@@ -28,25 +28,25 @@ $(document).ready(function () {
     $("input[name=firstInput]").bind('keyup input', function () {
         var tmp = parseInt($(this).val());
         console.log(tmp);
-        $("#sliderMinX").slider('option', 'value', tmp);
+        $("div#sliderMinX").slider('option', 'value', tmp);
     });
 
     $("input[name=secondInput]").bind('keyup input', function () {
         var tmp = parseInt($(this).val());
         console.log(tmp);
-        $("#sliderMaxX").slider('option', 'value', tmp);
+        $("div#sliderMaxX").slider('option', 'value', tmp);
     });
 
     $("input[name=thirdInput]").bind('keyup input', function () {
         var tmp = parseInt($(this).val());
         console.log(tmp);
-        $("#sliderMinY").slider('option', 'value', tmp);
+        $("div#sliderMinY").slider('option', 'value', tmp);
     });
 
     $("input[name=fourthInput]").bind('keyup input', function () {
         var tmp = parseInt($(this).val());
         console.log(tmp);
-        $("#sliderMaxY").slider('option', 'value', tmp);
+        $("div#sliderMaxY").slider('option', 'value', tmp);
     });
 
     // resets values back to reasonable input on refresh
@@ -57,7 +57,7 @@ $(document).ready(function () {
 
     //sets up the sliders and awaits the slide event
     $(function () {
-        $("#sliderMinX").slider({
+        $("div#sliderMinX").slider({
             min: 0,
             max: 100,
             slide: function (event, ui) {
@@ -67,7 +67,7 @@ $(document).ready(function () {
     });
 
     $(function () {
-        $("#sliderMaxX").slider({
+        $("div#sliderMaxX").slider({
             min: 0,
             max: 100,
             slide: function (event, ui) {
@@ -77,7 +77,7 @@ $(document).ready(function () {
     });
 
     $(function () {
-        $("#sliderMinY").slider({
+        $("div#sliderMinY").slider({
             min: 0,
             max: 100,
             slide: function (event, ui) {
@@ -87,7 +87,7 @@ $(document).ready(function () {
     });
 
     $(function () {
-        $("#sliderMaxY").slider({
+        $("div#sliderMaxY").slider({
             min: 0,
             max: 100,
             slide: function (event, ui) {
@@ -291,11 +291,11 @@ function addTab(xMin, xMax, yMin, yMax, table) {
 }
 
 // When close span clicked, it will close the closest tab
-$("#tabs").tabs().delegate("span.ui-icon-circle-close", "click", function () {
+$("div#tabs").tabs().delegate("span.ui-icon-circle-close", "click", function () {
     var panelId = $(this).closest("li").remove().attr(
         "aria-controls");
     $("#" + panelId).remove();
-    $("#tabs").tabs("refresh");
+    $("div#tabs").tabs("refresh");
 });
 
 $('#deleteTabs').click(function () {
@@ -304,8 +304,8 @@ $('#deleteTabs').click(function () {
         var panelId = $(this).closest("li").remove().attr(
             "aria-controls");
         $("#" + panelId).remove();
-        $("#tabs").tabs("refresh");
+        $("div#tabs").tabs("refresh");
     });
 
-    $('#tabs').tabs("refresh");
+    $('div#tabs').tabs("refresh");
 });
