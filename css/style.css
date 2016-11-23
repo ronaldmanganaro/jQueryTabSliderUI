@@ -2,26 +2,27 @@
 Ronald Manganaro(c) copyright 2016
 Email: ronald_manganaro@student.uml.edu
 COMP 3010 - 201 GUI Programming I
-Assignment 7
+Assignment 8
 Ronald Manganaro, Umass Lowell Computer Science
-Date: November 15, 2016
+Date: November 22, 2016
 
-Description: Nothing added for this assignment
-same as assignment 6.
+Description: added simple margins for slider 
+and tabs.
 
 */
 h1 {
   text-align: center;
 }
 
-#tabs{font-size: 14px;}
-         .ui-widget-header {
-            
-            border: 1px solid;
-            font-weight: bold;
-         }
+/* tab label styling*/
+#tabs{ 
+    font-size: 14px;
+}.ui-widget-header {
+    border: 1px solid;
+    font-weight: bold;
+}
 
-
+/* added margins to the sliders */
 #sliderMinX {
     margin: 5px;
 }

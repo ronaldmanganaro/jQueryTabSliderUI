@@ -2,15 +2,17 @@
 Ronald Manganaro(c) copyright 2016
 Email: ronald_manganaro@student.uml.edu
 COMP 3010 - 201 GUI Programming I
-Assignment 7
+Assignment 8
 Ronald Manganaro, Umass Lowell Computer Science
-Date: November 15, 2016
+Date: November 22, 2016
 
-Description: Added simply on the fly validation in
-addition to the validate function from the last assignment.
-The forms are now all required and the input is checked
-before the button is clicked to make sure the user is
-not putting in a min value greater than the max.
+Description: Added slider/tabs to the older assignment.
+At the time of writing this the jquery validator is not working
+for some reason, but everything else is. The slider work allowing
+for a min and max value. I also added the feature that makes the
+slider move when the +/- buttons on the input are clicked. The tabs
+have check marks that can be used to select which tabs to delete and 
+which to keep. The x's will delete the current tabs.
 */
 
 // Find the button used to make the table,set onclick listener, validate input
@@ -19,30 +21,46 @@ createBtn.onclick = (validate);
 
 // inputfields are the form fields used to change style etc on bad/good input
 var Inputfield = document.getElementsByTagName("input");
-var tabCount = 1;
-
-var tabTitle = $("#tab_title"),
-    tabContent = $("#tab_content"),
-    tabTemplate = "<li><a href='#{href}'>#{label}</a></li>",
-    tabCounter = 2;
-
-var tabs = $("#tabs").tabs();
+var myTabs = $("#tabs").tabs();
 
 $(document).ready(function () {
 
-
-    $(function () {
-        $("#tabs").tabs({
-            heightStyle: "fill",
-            collapsible: true,
-            hide: "slideUp"
-        });
+    // Moves the slider if the user clicks +/- buttons
+    $("input[name=firstInput]").bind('keyup input', function () {
+        var tmp = parseInt($(this).val());
+        console.log(tmp);
+        $("#sliderMinX").slider('option', 'value', tmp);
     });
 
+    $("input[name=secondInput]").bind('keyup input', function () {
+        var tmp = parseInt($(this).val());
+        console.log(tmp);
+        $("#sliderMaxX").slider('option', 'value', tmp);
+    });
+
+    $("input[name=thirdInput]").bind('keyup input', function () {
+        var tmp = parseInt($(this).val());
+        console.log(tmp);
+        $("#sliderMinY").slider('option', 'value', tmp);
+    });
+
+    $("input[name=fourthInput]").bind('keyup input', function () {
+        var tmp = parseInt($(this).val());
+        console.log(tmp);
+        $("#sliderMaxY").slider('option', 'value', tmp);
+    });
+
+    // resets values back to reasonable input on refresh
+    $("#firstInput").val(1);
+    $("#secondInput").val(2);
+    $("#thirdInput").val(3);
+    $("#fourthInput").val(4);
+
+    //sets up the sliders and awaits the slide event
     $(function () {
         $("#sliderMinX").slider({
             min: 0,
-            max: 50,
+            max: 100,
             slide: function (event, ui) {
                 $("#firstInput").val(ui.value);
             }
@@ -52,7 +70,7 @@ $(document).ready(function () {
     $(function () {
         $("#sliderMaxX").slider({
             min: 0,
-            max: 50,
+            max: 100,
             slide: function (event, ui) {
                 $("#secondInput").val(ui.value);
             }
@@ -62,7 +80,7 @@ $(document).ready(function () {
     $(function () {
         $("#sliderMinY").slider({
             min: 0,
-            max: 50,
+            max: 100,
             slide: function (event, ui) {
                 $("#thirdInput").val(ui.value);
             }
@@ -72,7 +90,7 @@ $(document).ready(function () {
     $(function () {
         $("#sliderMaxY").slider({
             min: 0,
-            max: 50,
+            max: 100,
             slide: function (event, ui) {
                 $("#fourthInput").val(ui.value);
             }
@@ -92,13 +110,14 @@ $(document).ready(function () {
             },
             secondInput: {
                 required: true,
+                isGreater: firstInput
             },
             thirdInput: {
                 required: true,
             },
             fourthInput: {
                 required: true,
-
+                isGreater: thirdInput
             }
         },
         messages: {
@@ -202,16 +221,23 @@ function deleteTable() {
         console.log("There was no table!");
 }
 
+var tabcount = 1;
+
 // Creates the table with Horizontal/Vertical ranges
 function createTable(xMin, xMax, yMin, yMax) {
     //delete table if one already exists
     //deleteTable();
-    addTab();
+    //addTab();
     var x, y; // used to count cells
     x = y = 0;
     var cell; // used to change text of cells
     var row; // used to keep track of tmp rows 
-    var table = document.getElementById("theTable"); //the dyn table
+
+    //creates tables as tabs are added
+    var table = document.createElement("table");
+    var tableid = "table" + tabcount;
+
+    //var table = document.getElementById("theTable"); //the dyn table
 
     // for loop for creating the rows and columns
     for (i = yMin - 1; i <= yMax; i++) {
@@ -235,24 +261,52 @@ function createTable(xMin, xMax, yMin, yMax) {
         y = 0;
         x++;
     }
-     $('#table' + tabCount).html(table); 
-     
+
+    //when done making the table adds the tab
+    addTab(xMin, xMax, yMin, yMax, table);
 }
 
-function addTab() {
-    tabCount++;
-      
-    var rowStart = parseInt($('input[name=firstInput]').val()),
-        rowEnd = parseInt($('input[name=secondInput]').val()),
-        colStart = parseInt($('input[name=thirdInput]').val()),
-        colEnd = parseInt($('input[name=fourthInput]').val());
+var tabsdiv = $("#tabs");
+var tabslist = tabsdiv.find("ul");
+
+//param xMin, xMax, yMin, yMax display the table
+//param table is the new table to add to the tab 
+function addTab(xMin, xMax, yMin, yMax, table) {
+    var tabname = "(" + xMin + ',' + xMax + ',' + yMin + ',' + yMax + ")";
+    var tablink = 'href="#tab-"';
+
+    //creates the tags for the tabslist
+    tabslist.append('<li><a href="#tab-' + tabcount + '">' + 
+    tabname + '</a> <input name="check" type="checkbox" id="checkbox' + 
+    tabcount + '"><span id="tabspan' + 
+    tabcount + '" class="ui-icon ui-icon-circle-close"></span></li>');
     
-    var label = tabTitle.val() || "Parameters(" + rowStart + "," + rowEnd + "," + colStart + "," + colEnd + ")",
-        id = "tabs-" + tabCount,
-        li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label));
+    // add content to the new tab 
+    tabsdiv.append('<div id="tab-' + tabcount + '"><\/div>')
+    $('#tab-' + tabcount).append(table);
 
-    tabs.find(".ui-tabs-nav").append(li);
-    tabs.append("<div id='" + id + "'><div id=\"table" + tabCount + "\"></div></div>");
-    tabs.tabs("refresh");
+    // refresh tabs and add to the number of them 
+    $('#tabs').tabs("refresh");
+    tabcount++;
+
 }
 
+// When close span clicked, it will close the closest tab
+myTabs.delegate("span.ui-icon-circle-close", "click", function () {
+    var panelId = $(this).closest("li").remove().attr(
+        "aria-controls");
+    $("#" + panelId).remove();
+    myTabs.tabs("refresh");
+});
+
+$('#deleteTabs').click(function () {
+    //loops through checkboxes that are checked
+    $('input:checkbox:checked').each(function () {
+        var panelId = $(this).closest("li").remove().attr(
+            "aria-controls");
+        $("#" + panelId).remove();
+        myTabs.tabs("refresh");
+    });
+
+    $('#tabs').tabs("refresh");
+});

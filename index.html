@@ -4,13 +4,12 @@
 Ronald Manganaro(c) copyright 2016
 Email: ronald_manganaro@student.uml.edu
 COMP 3010 - 201 GUI Programming I
-Assignment 7
+Assignment 8
 Ronald Manganaro, Umass Lowell Computer Science
-Date: November 15, 2016
+Date: November 22, 2016
 
-Description: added labels and jquery links. All additions
-were implemented in the Table.js file. Other than that
-I used labels for the input text.
+Description: same file as before minus the tablediv
+since the table area is created within tabs.
 
 -->
 <html lang="en">
@@ -20,8 +19,7 @@ I used labels for the input text.
 	<meta charset="utf-8" />
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 	<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
-	<script src="http://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+	
 </head>
 
 <body>
@@ -34,47 +32,45 @@ I used labels for the input text.
 	</header>
 
 
-	<!-- This div holds all my forms/generate button -->
+	<!-- This outermost div holds the list of links to tabs -->
 	<div id="tabs">
 		<ul>
 			<li><a href="#tabs-1">Multiplication Table</a></li>
 		</ul>
-
-
+		<!-- Original multiplication table tab -->
 		<div id="tabs-1">
+			<!-- all form and button here -->
 			<div id="formarea">
 				<form name="numbersForm" id="myForm">
 					<label for="firstInput">Horizontal Start:</label>
 					<div id="sliderMinX"></div>
-					<input class="numbersONLY" type="number" name="firstInput" id="firstInput">
+					<input class="numbersONLY" type="number" name="firstInput" id="firstInput" min="0" max="100">
 					<br>
 					<label for="secondInput">Horizontal End:</label>
 					<div id="sliderMaxX"></div>
-					<input class="numbersONLY" type="number" name="secondInput" id="secondInput">
+					<input class="numbersONLY" type="number" name="secondInput" id="secondInput" min="1" max="100">
 					<br>
 					<label for="thirdInput"> Vertical Start:</label>
 					<div id="sliderMinY"></div>
-					<input class="numbersONLY" type="number" name="thirdInput" id="thirdInput">
+					<input class="numbersONLY" type="number" name="thirdInput" id="thirdInput" min="0" max="100">
 					<br>
 					<label for="fourthInput">Vertical End:</label>
 					<div id="sliderMaxY"></div>
-					<input class="numbersONLY" type="number" name="fourthInput" id="fourthInput">
+					<input class="numbersONLY" type="number" name="fourthInput" id="fourthInput" min="1" max="100">
 					<br>
 					<input id="createBtn" type="button" onclick="validate();" value="Generate">
-					<!-- Quick warning that large tables take time to create -->
-					<p>Please do not enter ranges with > 200 numbers!
+					<button id="deleteTabs" type="button">Delete Tabs</button>
+					<!-- only allows number between 1 and 100 -->
+					<p>Please enter any number between 1 and 100.
 					</p>
 				</form>
 			</div>
 		</div>
 	</div>
 
-	<!-- location of my dynamic table -->
-	<div id="tableDiv">
-		<table id="theTable"></table>
-	</div>
-
-	<!-- This is the js file that hold createTable, deleteTable, and validate -->
+	<!-- This is the js file that hold createTable, deleteTable, etc -->
+	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js"></script>
 	<script type="text/javascript" src="js/Table.js"></script>
