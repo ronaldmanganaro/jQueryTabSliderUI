@@ -15,52 +15,70 @@ I used labels for the input text.
 -->
 <html lang="en">
 
-  <head>
-    <title>RFManganaro's Times Tables</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
-  </head>
+<head>
+	<title>RFManganaro's Times Tables</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+</head>
 
-  <body>
-    <!-- Header just include h1 welcome text -->
-    <header>
-      <h1>
-          Welcome to Ronald Manganaro's Table Generator!
-      </h1>
-      <hr>
-    </header>
+<body>
+	<!-- Header just include h1 welcome text -->
+	<header>
+		<h1>
+			Welcome to Ronald Manganaro's Table Generator!
+		</h1>
+		<hr>
+	</header>
 
-    <!-- This div holds all my forms/generate button --> 
-    <div id="formarea">
-        <form name="numbersForm" id="myForm">
-            <label for="firstInput">Horizontal Start:</label>
-            <input class="numbersONLY" type="number" name="firstInput" id="firstInput">
-            <br>
-            <label for="secondInput">Horizontal End:</label>
-            <input class="numbersONLY" type="number" name="secondInput" id="secondInput">
-            <br>
-            <label for="thirdInput"> Vertical Start:</label>
-            <input class="numbersONLY" type="number" name="thirdInput" id="thirdInput">
-            <br>
-            <label for="fourthInput">Vertical End:</label>
-            <input class="numbersONLY" type="number" name="fourthInput" id="fourthInput">
-            <br>
-            <input id="createBtn" type="button" onclick="validate();" value="Generate">
-            <!-- Quick warning that large tables take time to create -->
-            <p>Please do not enter ranges with > 200 numbers! <p>
-        </form>
-    </div>
 
-		<!-- location of my dynamic table -->
-	  <div id="tableDiv">
-		  <table id="theTable"></table>
-	  </div>
-      
-    <!-- This is the js file that hold createTable, deleteTable, and validate -->
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="js/Table.js"></script>
-  </body>
+	<!-- This div holds all my forms/generate button -->
+	<div id="tabs">
+		<ul>
+			<li><a href="#tabs-1">Multiplication Table</a></li>
+		</ul>
+
+
+		<div id="tabs-1">
+			<div id="formarea">
+				<form name="numbersForm" id="myForm">
+					<label for="firstInput">Horizontal Start:</label>
+					<div id="sliderMinX"></div>
+					<input class="numbersONLY" type="number" name="firstInput" id="firstInput">
+					<br>
+					<label for="secondInput">Horizontal End:</label>
+					<div id="sliderMaxX"></div>
+					<input class="numbersONLY" type="number" name="secondInput" id="secondInput">
+					<br>
+					<label for="thirdInput"> Vertical Start:</label>
+					<div id="sliderMinY"></div>
+					<input class="numbersONLY" type="number" name="thirdInput" id="thirdInput">
+					<br>
+					<label for="fourthInput">Vertical End:</label>
+					<div id="sliderMaxY"></div>
+					<input class="numbersONLY" type="number" name="fourthInput" id="fourthInput">
+					<br>
+					<input id="createBtn" type="button" onclick="validate();" value="Generate">
+					<!-- Quick warning that large tables take time to create -->
+					<p>Please do not enter ranges with > 200 numbers!
+					</p>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- location of my dynamic table -->
+	<div id="tableDiv">
+		<table id="theTable"></table>
+	</div>
+
+	<!-- This is the js file that hold createTable, deleteTable, and validate -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.0/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="js/Table.js"></script>
+
+</body>
 
 </html>

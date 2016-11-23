@@ -19,9 +19,66 @@ createBtn.onclick = (validate);
 
 // inputfields are the form fields used to change style etc on bad/good input
 var Inputfield = document.getElementsByTagName("input");
+var tabCount = 1;
 
+var tabTitle = $("#tab_title"),
+    tabContent = $("#tab_content"),
+    tabTemplate = "<li><a href='#{href}'>#{label}</a></li>",
+    tabCounter = 2;
+
+var tabs = $("#tabs").tabs();
 
 $(document).ready(function () {
+
+
+    $(function () {
+        $("#tabs").tabs({
+            heightStyle: "fill",
+            collapsible: true,
+            hide: "slideUp"
+        });
+    });
+
+    $(function () {
+        $("#sliderMinX").slider({
+            min: 0,
+            max: 50,
+            slide: function (event, ui) {
+                $("#firstInput").val(ui.value);
+            }
+        });
+    });
+
+    $(function () {
+        $("#sliderMaxX").slider({
+            min: 0,
+            max: 50,
+            slide: function (event, ui) {
+                $("#secondInput").val(ui.value);
+            }
+        });
+    });
+
+    $(function () {
+        $("#sliderMinY").slider({
+            min: 0,
+            max: 50,
+            slide: function (event, ui) {
+                $("#thirdInput").val(ui.value);
+            }
+        });
+    });
+
+    $(function () {
+        $("#sliderMaxY").slider({
+            min: 0,
+            max: 50,
+            slide: function (event, ui) {
+                $("#fourthInput").val(ui.value);
+            }
+        });
+    });
+
     //checks to see if min is greater than max
     $.validator.addMethod('isGreater', function (value, element, param) {
         return this.optional(element) || value >= parseInt($(param).val());
@@ -35,14 +92,13 @@ $(document).ready(function () {
             },
             secondInput: {
                 required: true,
-                isGreater: firstInput
             },
             thirdInput: {
                 required: true,
             },
             fourthInput: {
                 required: true,
-                isGreater: thirdInput
+
             }
         },
         messages: {
@@ -149,8 +205,8 @@ function deleteTable() {
 // Creates the table with Horizontal/Vertical ranges
 function createTable(xMin, xMax, yMin, yMax) {
     //delete table if one already exists
-    deleteTable();
-
+    //deleteTable();
+    addTab();
     var x, y; // used to count cells
     x = y = 0;
     var cell; // used to change text of cells
@@ -179,4 +235,24 @@ function createTable(xMin, xMax, yMin, yMax) {
         y = 0;
         x++;
     }
+     $('#table' + tabCount).html(table); 
+     
 }
+
+function addTab() {
+    tabCount++;
+      
+    var rowStart = parseInt($('input[name=firstInput]').val()),
+        rowEnd = parseInt($('input[name=secondInput]').val()),
+        colStart = parseInt($('input[name=thirdInput]').val()),
+        colEnd = parseInt($('input[name=fourthInput]').val());
+    
+    var label = tabTitle.val() || "Parameters(" + rowStart + "," + rowEnd + "," + colStart + "," + colEnd + ")",
+        id = "tabs-" + tabCount,
+        li = $(tabTemplate.replace(/#\{href\}/g, "#" + id).replace(/#\{label\}/g, label));
+
+    tabs.find(".ui-tabs-nav").append(li);
+    tabs.append("<div id='" + id + "'><div id=\"table" + tabCount + "\"></div></div>");
+    tabs.tabs("refresh");
+}
+

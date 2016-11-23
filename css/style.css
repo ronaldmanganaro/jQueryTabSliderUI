@@ -14,6 +14,29 @@ h1 {
   text-align: center;
 }
 
+#tabs{font-size: 14px;}
+         .ui-widget-header {
+            
+            border: 1px solid;
+            font-weight: bold;
+         }
+
+
+#sliderMinX {
+    margin: 5px;
+}
+
+#sliderMaxX {
+    margin: 5px;
+}
+
+#sliderMinY {
+    margin: 5px;
+}
+
+#sliderMaxY {
+    margin: 5px;
+}
 
 body {
     background-position: center;
