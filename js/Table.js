@@ -21,7 +21,6 @@ createBtn.onclick = (validate);
 
 // inputfields are the form fields used to change style etc on bad/good input
 var Inputfield = document.getElementsByTagName("input");
-var myTabs = $("#tabs").tabs();
 
 $(document).ready(function () {
 
@@ -292,11 +291,11 @@ function addTab(xMin, xMax, yMin, yMax, table) {
 }
 
 // When close span clicked, it will close the closest tab
-myTabs.delegate("span.ui-icon-circle-close", "click", function () {
+$("#tabs").tabs().delegate("span.ui-icon-circle-close", "click", function () {
     var panelId = $(this).closest("li").remove().attr(
         "aria-controls");
     $("#" + panelId).remove();
-    myTabs.tabs("refresh");
+    $("#tabs").tabs("refresh");
 });
 
 $('#deleteTabs').click(function () {
@@ -305,7 +304,7 @@ $('#deleteTabs').click(function () {
         var panelId = $(this).closest("li").remove().attr(
             "aria-controls");
         $("#" + panelId).remove();
-        myTabs.tabs("refresh");
+        $("#tabs").tabs("refresh");
     });
 
     $('#tabs').tabs("refresh");
